@@ -160,17 +160,17 @@ NNADAPTER_EXPORT void ConvertQuantizationSymmToAsymm(core::Model* model) {
           ConvertOperandSymmToAsymm(output_operands[i], 128);
         }
       } break;
-      case NNADAPTER_DEQUANTIZE:
-      case NNADAPTER_YOLO_BOX:
-      case NNADAPTER_CUSTOM_YOLO_BOX_3D:
-      case NNADAPTER_CUSTOM_YOLO_BOX_3D_NMS_FUSER: {
-      } break;
       case NNADAPTER_UNSTACK: {
         ConvertOperandSymmToAsymm(input_operands[0], 128);
         NNADAPTER_CHECK_GE(output_count, 1);
         for (uint32_t i = 0; i < output_count; i++) {
           ConvertOperandSymmToAsymm(output_operands[i], 128);
         }
+      } break;
+      case NNADAPTER_DEQUANTIZE:
+      case NNADAPTER_YOLO_BOX:
+      case NNADAPTER_CUSTOM_YOLO_BOX_3D:
+      case NNADAPTER_CUSTOM_YOLO_BOX_3D_NMS_FUSER: {
       } break;
       default:
         NNADAPTER_LOG(FATAL) << "Missing the processing of "
